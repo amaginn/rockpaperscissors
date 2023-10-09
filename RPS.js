@@ -9,7 +9,6 @@ let playerWinCount = 0
 let compWinCount = 0
 
 // Create a function that allows a player to play 5 rounds with the computer
-// function game() {
     function playRound(playerSelection, computerSelection) {
         // to lower case
         playerSelection = playerSelection.toLowerCase();
@@ -41,14 +40,17 @@ let compWinCount = 0
 function keepScore(result) { 
     if (result == "You Lose!")
         return compWinCount++;
-    else if (result == "Winner Winner!")
+    else if (result == "Winner Winner!!")
         return playerWinCount++;
     }
-for (let i = 0; i <5; i++) {
-// check code viability
-  const playerSelection = "rock";
+
+// loop game 5 times
+while (compWinCount < 5 && playerWinCount < 5) {
+  const playerSelection = prompt("Rock, Paper, or Scissors?");
   let computerSelection = getComputerChoice();
   const result = (playRound(playerSelection, computerSelection));
   console.log(result);
-  keepScore(result);
+  console.log(keepScore(result));
 }
+// output results for user
+console.log("Final Scores: Computer - ", compWinCount, "Player - ", playerWinCount);
