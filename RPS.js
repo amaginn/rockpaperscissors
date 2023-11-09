@@ -41,19 +41,19 @@ const finalGameResults = document.createElement('p');
 
         // if player loses
         if (playerSelection === 'Rock' && computerSelection === 'Paper')
-            gameResults.textContent = ('You Lose!'), compWinCount++;
+            gameResults.textContent = ('The robot wins this round..'), compWinCount++;
         else if (playerSelection === 'Paper' && computerSelection === 'Scissors')
-            gameResults.textContent = ('You Lose!'), compWinCount++;
+            gameResults.textContent = ('The robot wins this round..'), compWinCount++;
         else if (playerSelection === 'Scissors' && computerSelection === 'Rock')
-            gameResults.textContent = ('You Lose!'), compWinCount++;
+            gameResults.textContent = ('The robot wins this round..'), compWinCount++;
 
         // if player wins
         else if (playerSelection === 'Rock' && computerSelection === 'Scissors')
-            gameResults.textContent = ("Winner Winner!!"), playerWinCount++;
+            gameResults.textContent = ("You win this round!"), playerWinCount++;
         else if (playerSelection === 'Paper' && computerSelection === 'Rock')
-            gameResults.textContent = ("Winner Winner!!"), playerWinCount++;
+            gameResults.textContent = ("You win this round!"), playerWinCount++;
         else if (playerSelection === 'Scissors' && computerSelection === 'Paper')
-            gameResults.textContent = ("Winner Winner!!"), playerWinCount++;
+            gameResults.textContent = ("You win this round!"), playerWinCount++;
 
         // Tie result
         else if (playerSelection === computerSelection)
@@ -69,8 +69,8 @@ const finalGameResults = document.createElement('p');
             gameResults.textContent = ("Computer wins the game!");
         }
         
+        mainContainer.appendChild(gameResults);
         // output results for user
         finalGameResults.textContent = ("Scores: Computer - " + compWinCount + " Player - " + playerWinCount);
         mainContainer.appendChild(finalGameResults);
-        mainContainer.appendChild(gameResults);
     }
