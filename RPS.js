@@ -18,6 +18,11 @@ rockButton.addEventListener('click', () => playRound("Rock"));
 paperButton.addEventListener('click', () => playRound("Paper"));
 scissorsButton.addEventListener('click', () => playRound("Scissors"));
 
+// Create elements for user/player selections
+const playerOutput = document.createElement('p');
+const computerOutput = document.createElement('p');
+const gameResults = document.createElement('p');
+const finalGameResults = document.createElement('p');
 
 // Create a function that allows a player to play 5 rounds with the computer
     function playRound(playerSelection) {
@@ -25,39 +30,47 @@ scissorsButton.addEventListener('click', () => playRound("Scissors"));
         const computerSelection = getComputerChoice();
 
          // Keep track of selections
-        console.log("Player selected: " + playerSelection);
-        console.log("Computer selected: " + computerSelection);
+        let mainDiv = document.getElementById("mainContainer");
+
+        // Output player and computer selections 
+        playerOutput.textContent = ("Player selected: " + playerSelection);
+        mainContainer.appendChild(playerOutput);
+        computerOutput.textContent = ("Computer selected: " + computerSelection);
+        mainContainer.appendChild(computerOutput);
+    
 
         // if player loses
         if (playerSelection === 'Rock' && computerSelection === 'Paper')
-            console.log('You Lose!'), compWinCount++;
+            gameResults.textContent = ('You Lose!'), compWinCount++;
         else if (playerSelection === 'Paper' && computerSelection === 'Scissors')
-            console.log('You Lose!'), compWinCount++;
+            gameResults.textContent = ('You Lose!'), compWinCount++;
         else if (playerSelection === 'Scissors' && computerSelection === 'Rock')
-            console.log('You Lose!'), compWinCount++;
+            gameResults.textContent = ('You Lose!'), compWinCount++;
 
         // if player wins
         else if (playerSelection === 'Rock' && computerSelection === 'Scissors')
-            console.log("Winner Winner!!"), playerWinCount++;
+            gameResults.textContent = ("Winner Winner!!"), playerWinCount++;
         else if (playerSelection === 'Paper' && computerSelection === 'Rock')
-            console.log("Winner Winner!!"), playerWinCount++;
+            gameResults.textContent = ("Winner Winner!!"), playerWinCount++;
         else if (playerSelection === 'Scissors' && computerSelection === 'Paper')
-            console.log("Winner Winner!!"), playerWinCount++;
+            gameResults.textContent = ("Winner Winner!!"), playerWinCount++;
 
         // Tie result
         else if (playerSelection === computerSelection)
-            console.log("Tie Game!");
+            gameResults.textContent = ("Tie Game!");
         else
-            return "Please click either rock, paper, or scissors to play."
+            gameResults.textContent = ("Please click either rock, paper, or scissors to play.");
 
         // Write a function that adds a score to either side upon win/lose 
         const maxScore = 5;
         if (playerWinCount >= maxScore) {
-            console.log("Player wins the game!");
+            gameResults.textContent = ("Player wins the game!");
         } else if (compWinCount >= maxScore) {
-            console.log("Computer wins the game!");
+            gameResults.textContent = ("Computer wins the game!");
         }
         
         // output results for user
-        console.log("Scores: Computer - ", compWinCount, "Player - ", playerWinCount);
+        finalGameResults.textContent = ("Scores: Computer - " + compWinCount + " Player - " + playerWinCount);
+        mainContainer.appendChild(finalGameResults);
+        mainContainer.appendChild(gameResults);
     }
