@@ -24,6 +24,25 @@ const computerOutput = document.createElement('p');
 const gameResults = document.createElement('p');
 const finalGameResults = document.createElement('p');
 
+// Function to disable buttons after 5 rounds are up
+const buttons = document.querySelectorAll('button')
+function disableButtons() {
+    buttons.forEach(elem => {
+        elem.disabled = true
+    })
+}
+
+// Creating a button to refresh page
+const newGame = document.createElement('div');
+newGame.textContent = `Play Again`;
+newGame.classList.add('button');
+newGame.addEventListener('click', refreshPage)
+
+// Function to refresh page
+function refreshPage() {
+    window.location.reload(true);
+}
+
 // Create a function that allows a player to play 5 rounds with the computer
     function playRound(playerSelection) {
 
@@ -33,27 +52,27 @@ const finalGameResults = document.createElement('p');
         let mainDiv = document.getElementById("mainContainer");
 
         // Output player and computer selections 
-        playerOutput.textContent = ("Player selected: " + playerSelection);
-        mainContainer.appendChild(playerOutput);
-        computerOutput.textContent = ("Computer selected: " + computerSelection);
-        mainContainer.appendChild(computerOutput);
+        playerOutput.textContent = ("You: " + playerSelection);
+        matchUpContainer.appendChild(playerOutput);
+        computerOutput.textContent = ("Robot: " + computerSelection);
+        matchUpContainer.appendChild(computerOutput);
     
 
         // if player loses
         if (playerSelection === 'Rock' && computerSelection === 'Paper')
-            gameResults.textContent = ('The robot wins this round..'), compWinCount++;
+            gameResults.textContent = ('The robot won this round..'), compWinCount++;
         else if (playerSelection === 'Paper' && computerSelection === 'Scissors')
-            gameResults.textContent = ('The robot wins this round..'), compWinCount++;
+            gameResults.textContent = ('The robot won this round..'), compWinCount++;
         else if (playerSelection === 'Scissors' && computerSelection === 'Rock')
-            gameResults.textContent = ('The robot wins this round..'), compWinCount++;
+            gameResults.textContent = ('The robot won this round..'), compWinCount++;
 
         // if player wins
         else if (playerSelection === 'Rock' && computerSelection === 'Scissors')
-            gameResults.textContent = ("You win this round!"), playerWinCount++;
+            gameResults.textContent = ("You won this round!"), playerWinCount++;
         else if (playerSelection === 'Paper' && computerSelection === 'Rock')
-            gameResults.textContent = ("You win this round!"), playerWinCount++;
+            gameResults.textContent = ("You won this round!"), playerWinCount++;
         else if (playerSelection === 'Scissors' && computerSelection === 'Paper')
-            gameResults.textContent = ("You win this round!"), playerWinCount++;
+            gameResults.textContent = ("You won this round!"), playerWinCount++;
 
         // Tie result
         else if (playerSelection === computerSelection)
@@ -64,13 +83,14 @@ const finalGameResults = document.createElement('p');
         // Write a function that adds a score to either side upon win/lose 
         const maxScore = 5;
         if (playerWinCount >= maxScore) {
-            gameResults.textContent = ("Player wins the game!");
+            gameResults.textContent = ("You won the game!"), disableButtons(), gameResults.appendChild(newGame);
         } else if (compWinCount >= maxScore) {
-            gameResults.textContent = ("Computer wins the game!");
+            gameResults.textContent = ("The robot won the game!"), disableButtons(), gameResults.appendChild(newGame);
         }
         
-        mainContainer.appendChild(gameResults);
+       
         // output results for user
-        finalGameResults.textContent = ("Scores: Computer - " + compWinCount + " Player - " + playerWinCount);
-        mainContainer.appendChild(finalGameResults);
+        finalGameResults.textContent = ("You - " + playerWinCount + " Robot - " + compWinCount);
+        resultsContainer.appendChild(finalGameResults);
+        resultsContainer.appendChild(gameResults);
     }
